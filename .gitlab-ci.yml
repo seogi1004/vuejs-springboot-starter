@@ -16,10 +16,10 @@ cache:
 # You specify the stages. Those are the steps that GitLab will go through 
 # Order matters. 
 stages:
-  - fetest
-  - betest
-  - febuild
-  - bebuild
+  - test_fe
+  - test_be
+  - build_fe
+  - build_be
   - deploy
   - patch
 
@@ -33,7 +33,7 @@ stages:
     refs:
       - master
 
-FE_Test:
+Test_FE:
   extends: .Job_Only
   image: node:10
   stage: fetest
@@ -43,14 +43,14 @@ FE_Test:
     - npm test
   coverage: /All files\s*\|\s*([\d\.]+)/
 
-BE_Test:
+Test_BE:
   extends: .Job_Only
   image: maven:3.3.9
   stage: betest
   script:
     - mvn test $MAVEN_CLI_OPTS clean verify
 
-FE_Build:
+Build_FE:
   extends: .Job_Only
   image: node:10
   stage: febuild
@@ -60,7 +60,7 @@ FE_Build:
     - npm run dist
     - ls -all ./src/main/resources/static
 
-BE_Build:
+Build_BE:
   extends: .Job_Only
   image: maven:3.3.9
   stage: bebuild
