@@ -92,4 +92,4 @@ Deploy:
     - ls -all ./dist
     - sshpass -V
     - export SSHPASS=$USER_PASS
-    - sshpass -e scp -P51022 -oStrictHostKeyChecking=no -r ./dist/webpack-springboot-starter-1.0.0.jar root@61.37.50.64:/opt/public
+    - sshpass -e scp -P51022 -oStrictHostKeyChecking=no -r ./dist/vuejs-springboot-starter-1.0.0.jar root@61.37.50.64:/opt/public
