@@ -4,3 +4,7 @@ coverage/
 
 # WebStorm
 .idea/
+
+# Project
+dist/
+target/
