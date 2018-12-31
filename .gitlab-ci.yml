@@ -22,14 +22,18 @@ stages:
   - bebuild
   - deploy
 
+only:
+  changes:
+    - "src/**/*"
+    - "package-lock.json"
+    - "webpack.config.json"
+    - "pom.xml"
+  refs:
+    - master
+      
 FE_Test:
   image: node:10
   stage: fetest
-  only:
-    changes:
-      - "src/**/*"
-    refs:
-      - master
   before_script:
     - npm install 
   script:
@@ -39,25 +43,12 @@ FE_Test:
 BE_Test:
   image: maven:3.3.9
   stage: betest
-  only:
-    changes:
-      - "src/**/*"
-      - "pom.xml"
-    refs:
-      - master
   script:
     - mvn test $MAVEN_CLI_OPTS clean verify
     
 FE_Build:
   image: node:10
   stage: febuild
-  only:
-    changes:
-      - "src/**/*"
-      - "package-lock.json"
-      - "webpack.config.json"
-    refs:
-      - master
   before_script:
     - npm install 
   script:
@@ -67,25 +58,11 @@ FE_Build:
 BE_Build:
   image: maven:3.3.9
   stage: bebuild
-  only:
-    changes:
-      - "src/**/*"
-      - "pom.xml"
-    refs:
-      - master
   script:
     - mvn -DskipTests=true install $MAVEN_CLI_OPTS clean verify
     
 Deploy:
   stage: deploy
-  only:
-    changes:
-      - "src/**/*"
-      - "package-lock.json"
-      - "webpack.config.json"
-      - "pom.xml"
-    refs:
-      - master
   before_script:
     - apt-get update -qq && apt-get install -y -qq sshpass
   script:
