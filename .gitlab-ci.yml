@@ -1,0 +1,95 @@
+variables:
+  MAVEN_CLI_OPTS: "--batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+# And to cache them as well.
+cache:
+  key: "$CI_BUILD_REF_NAME"
+  untracked: true
+  paths:
+    - node_modules/
+    - .m2/repository/
+    - target/
+    - dist/
+    - src/main/resources/static/
+
+# You specify the stages. Those are the steps that GitLab will go through 
+# Order matters. 
+stages:
+  - fetest
+  - betest
+  - febuild
+  - bebuild
+  - deploy
+
+FE_Test:
+  image: node:10
+  stage: fetest
+  only:
+    changes:
+      - "src/**/*"
+    refs:
+      - master
+  before_script:
+    - npm install 
+  script:
+    - npm test
+  coverage: /All files\s*\|\s*([\d\.]+)/
+
+BE_Test:
+  image: maven:3.3.9
+  stage: betest
+  only:
+    changes:
+      - "src/**/*"
+      - "pom.xml"
+    refs:
+      - master
+  script:
+    - mvn test $MAVEN_CLI_OPTS clean verify
+    
+FE_Build:
+  image: node:10
+  stage: febuild
+  only:
+    changes:
+      - "src/**/*"
+      - "package-lock.json"
+      - "webpack.config.json"
+    refs:
+      - master
+  before_script:
+    - npm install 
+  script:
+    - npm run dist
+    - ls -all ./src/main/resources/static
+
+BE_Build:
+  image: maven:3.3.9
+  stage: bebuild
+  only:
+    changes:
+      - "src/**/*"
+      - "pom.xml"
+    refs:
+      - master
+  script:
+    - mvn -DskipTests=true install $MAVEN_CLI_OPTS clean verify
+    
+Deploy:
+  stage: deploy
+  only:
+    changes:
+      - "src/**/*"
+      - "package-lock.json"
+      - "webpack.config.json"
+      - "pom.xml"
+    refs:
+      - master
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq sshpass
+  script:
+    - ls -all ./dist
+    - sshpass -V
+    - export SSHPASS=$USER_PASS
+    - sshpass -e scp -P51022 -oStrictHostKeyChecking=no -r ./dist/webpack-springboot-starter-1.0.0.jar root@61.37.50.64:/opt/public
