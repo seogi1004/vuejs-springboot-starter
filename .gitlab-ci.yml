@@ -22,16 +22,18 @@ stages:
   - bebuild
   - deploy
 
-only:
-  changes:
-    - "src/**/*"
-    - "package-lock.json"
-    - "webpack.config.json"
-    - "pom.xml"
-  refs:
-    - master
+.Job_Only:
+  only:
+    changes:
+      - "src/**/*"
+      - "package-lock.json"
+      - "webpack.config.json"
+      - "pom.xml"
+    refs:
+      - master
       
 FE_Test:
+  extends: .Job_Only
   image: node:10
   stage: fetest
   before_script:
@@ -41,12 +43,14 @@ FE_Test:
   coverage: /All files\s*\|\s*([\d\.]+)/
 
 BE_Test:
+  extends: .Job_Only
   image: maven:3.3.9
   stage: betest
   script:
     - mvn test $MAVEN_CLI_OPTS clean verify
     
 FE_Build:
+  extends: .Job_Only
   image: node:10
   stage: febuild
   before_script:
@@ -56,12 +60,14 @@ FE_Build:
     - ls -all ./src/main/resources/static
 
 BE_Build:
+  extends: .Job_Only
   image: maven:3.3.9
   stage: bebuild
   script:
     - mvn -DskipTests=true install $MAVEN_CLI_OPTS clean verify
     
 Deploy:
+  extends: .Job_Only
   stage: deploy
   before_script:
     - apt-get update -qq && apt-get install -y -qq sshpass
