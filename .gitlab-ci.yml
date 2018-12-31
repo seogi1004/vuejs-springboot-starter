@@ -82,7 +82,9 @@ Patch:
   extends: .Job_Only
   stage: patch
   script:
-    - git checkout master
+    - export CI_PUSH_REPO=`echo $CI_BUILD_REPO | perl -pe 's#.*@(.+?(\:\d+)?)/#git@\1:#'`
+    - git config --global user.name $GIT_ACCESS_USER
+    - git config --global user.email $GIT_ACCESS_EMAIL
+    - git remote set-url --push origin "${CI_PUSH_REPO}"
     - git tag $TAG_VERSION
-    - git log --decorate
-    - git push origin $TAG_VERSION
+    - git push --tags origin ci_processing:${CI_BUILD_REF_NAME}
