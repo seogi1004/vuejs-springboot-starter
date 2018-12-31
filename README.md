@@ -9,8 +9,8 @@ Enter the command as follows.
  
  If you modify the js or scss file in the 'src/main/resources/static/*' directory, it will be automatically bundled.
  
- Development URL : http://localhost:8081/hello<br>
- Production URL : http://localhost:8080/hello
+ Development URL : http://localhost:90/hello<br>
+ Production URL : http://localhost:80/hello
  
  
  ## Official manual
