@@ -1,12 +1,12 @@
-const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = (env) => {
-    let clientPath = path.resolve(__dirname, 'src/main/client');
-    let outputPath = path.resolve(__dirname, 'src/main/resources/static');
+    const clientPath = path.resolve(__dirname, 'src/main/client');
+    const outputPath = path.resolve(__dirname, 'src/main/resources/static');
 
     return {
         mode: !env ? 'development' : env,
@@ -28,10 +28,10 @@ module.exports = (env) => {
                     }
                 }
             },
-            minimizer: (env == 'production') ? [
-                new UglifyJsPlugin(),
+            minimizer: [
+                new TerserPlugin(),
                 new OptimizeCssAssetsPlugin()
-            ] : []
+            ]
         },
         devServer: {
             contentBase: outputPath,
@@ -49,42 +49,53 @@ module.exports = (env) => {
                 test: /\.js$/,
                 use: [{
                     loader: 'babel-loader',
-                    options: {
-                        presets: 'env'
-                    }
                 }]
             }, {
                 test: /\.(css)$/,
-                use: [{
-                    loader: MiniCssExtractPlugin.loader
-                }, {
-                    loader: 'css-loader'
-                }]
+                use: [
+                    { loader: MiniCssExtractPlugin.loader },
+                    { loader: 'css-loader' }
+                ]
             }, {
-                test: /\.(jpe?g|png|gif)$/i,
-                use: [{
-                    loader: 'url-loader',
-                    options: {
-                        limit: 1024 * 10 // 10kb
-                    }
-                }]
+                test: /\.s[a|c]ss$/,
+                use: [
+                    { loader: MiniCssExtractPlugin.loader },
+                    { loader: 'css-loader' },
+                    { loader: 'sass-loader' }
+                ]
             }, {
-                test: /\.(svg)$/i,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name].[ext]',
-                        outputPath: 'images/'
-                    }
-                }]
-            }]
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            }].concat([ env == 'production' ?
+                {
+                    test: /\.(jpe?g|png|gif|svg)$/i,
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'images/'
+                        }
+                    }]
+                } : {
+                    test: /\.(jpe?g|png|gif|svg)$/i,
+                    use: [{
+                        loader: 'url-loader',
+                        options: {
+                            limit: 1024 * 1024
+                        }
+                    }]
+                }
+            ])
+        },
+        resolve: {
+            extensions: [ '.js', '.sass', '.scss', '.css', '.vue' ]
         },
         plugins: [
             new MiniCssExtractPlugin({
                 path: outputPath,
                 filename: '[name].css'
-            })
-            // , new BundleAnalyzerPlugin()
+            }),
+            new VueLoaderPlugin()
         ]
     }
 }
