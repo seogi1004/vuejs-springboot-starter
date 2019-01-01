@@ -12,73 +12,73 @@ cache:
     - dist/
     
 stages:
-#   - fetest
-#   - betest
-#   - febuild
-#   - bebuild
-#   - deploy
+  - fetest
+  - betest
+  - febuild
+  - bebuild
+  - deploy
   - patch
     
-# .Job_Only:
-#   only:
-#     changes:
-#       - "src/**/*"
-#       - "package-lock.json"
-#       - "webpack.config.json"
-#       - "pom.xml"
-#     refs:
-#       - master
+.Job_Only:
+  only:
+    changes:
+      - "src/**/*"
+      - "package-lock.json"
+      - "webpack.config.json"
+      - "pom.xml"
+    refs:
+      - master
     
-# FE_Test:
-#   extends: .Job_Only
-#   image: node:10
-#   stage: fetest
-#   before_script:
-#     - npm install
-#   script:
-#     - npm test
-#   coverage: /All files\s*\|\s*([\d\.]+)/
+FE_Test:
+  extends: .Job_Only
+  image: node:10
+  stage: fetest
+  before_script:
+    - npm install
+  script:
+    - npm test
+  coverage: /All files\s*\|\s*([\d\.]+)/
 
-# BE_Test:
-#   extends: .Job_Only
-#   image: maven:3.3.9
-#   stage: betest
-#   script:
-#     - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
+BE_Test:
+  extends: .Job_Only
+  image: maven:3.3.9
+  stage: betest
+  script:
+    - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
 
-# FE_Build:
-#   extends: .Job_Only
-#   image: node:10
-#   stage: febuild
-#   before_script:
-#     - npm install
-#   script:
-#     - npm run dist
-#     - ls -all ./src/main/resources/static
+FE_Build:
+  extends: .Job_Only
+  image: node:10
+  stage: febuild
+  before_script:
+    - npm install
+  script:
+    - npm run dist
+    - ls -all ./src/main/resources/static
 
-# BE_Build:
-#   extends: .Job_Only
-#   image: maven:3.3.9
-#   stage: bebuild
-#   script:
-#     - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
+BE_Build:
+  extends: .Job_Only
+  image: maven:3.3.9
+  stage: bebuild
+  script:
+    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
 
-# Deploy:
-#   extends: .Job_Only
-#   stage: deploy
-#   before_script:
-#     - apt-get update -qq && apt-get install -y -qq sshpass
-#   script:
-#     - ls -all ./dist
-#     - sshpass -V
-#     - export SSHPASS=$SSH_PASSWORD
-#     - sshpass -e scp -P51022 -oStrictHostKeyChecking=no -r ./dist/vuejs-springboot-starter-$TAG_VERSION.jar root@61.37.50.64:/opt/public
+Deploy:
+  extends: .Job_Only
+  image: maven:3.3.9
+  stage: deploy
+  before_script:
+    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+    - apt-get update -qq && apt-get install -y -qq sshpass
+  script:
+    - ls -all ./dist
+    - sshpass -V
+    - export SSHPASS=$SSH_PASSWORD
+    - sshpass -e scp -P51022 -oStrictHostKeyChecking=no -r ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@61.37.50.64:/opt/public
 
 Patch:
   image: maven:3.3.9
   only:
-    # variables:
-    #   - $TAG_VERSION =~ /release$/i
     changes:
       - "pom.xml"
     refs:
