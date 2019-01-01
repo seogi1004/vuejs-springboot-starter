@@ -85,7 +85,8 @@ Patch:
       - master
   stage: patch
   before_script:
-    - POM_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version)
+    - POM_VERSION=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
+    - echo $POM_VERSION
     - git config --global user.name "alvin.h"
     - git config --global user.email "seogi777@gmail.com"
   script:
