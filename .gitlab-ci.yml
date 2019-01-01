@@ -79,10 +79,17 @@ Patch:
   extends: .Job_Only
   stage: patch
   script:
-    - git config --global user.name "${GITLAB_USER_NAME}"
-    - git config --global user.email "${GITLAB_USER_EMAIL}"
-    - git remote remove origin
-    - git remote add origin gitgit@gitlab.com:alvin.h/vuejs-springboot-starter.git
-    - git remote set-url origin https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/alvin.h/vuejs-springboot-starter.git/
-    - git tag -a $TAG_VERSION -m "Version created by gitlab-ci Build"
-    - git push origin $TAG_VERSION
+    # Install ssh-agent through openssh-client if not present
+    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
+    # Add the private key to this user
+    - eval $(ssh-agent -s) && ssh-add <(echo "$SSH_PRIVATE_KEY") && mkdir -p ~/.ssh
+    # Docker specific settings
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    # Config git to avoid first usage questions. Set the identity
+    - git config --global user.email "noreply@example.com" && git config --global user.name "Gitlab CI"
+    # 
+    # Do Git stuff, for example:
+    #
+    - git checkout $CI_COMMIT_REF_NAME
+    - git tag $TAG_VERSION
+    - git push -u origin $TAG_VERSION
