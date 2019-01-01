@@ -27,9 +27,9 @@ FE_Test:
   stage: fetest
   cache:
     key: "$CI_BUILD_REF_NAME"
-      untracked: true
-      paths:
-        - node_modules/
+    untracked: true
+    paths:
+      - node_modules/
   before_script:
     - npm install
   script:
@@ -42,10 +42,10 @@ BE_Test:
   stage: betest
   cache:
     key: "$CI_BUILD_REF_NAME"
-      untracked: true
-      paths:
-        - .m2/repository/
-        - target/
+    untracked: true
+    paths:
+      - .m2/repository/
+      - target/
   script:
     - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
 
