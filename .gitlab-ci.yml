@@ -2,7 +2,14 @@ variables:
   MAVEN_CLI_OPTS: "--batch-mode clean verify"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   CI_REPOSITORY_URL: https://alvin.h:$ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
-  
+
+cache:
+  key: "$CI_BUILD_REF_NAME"
+  untracked: true
+  paths:
+    - src/main/resources/static/
+    - dist/
+    
 stages:
   - fetest
   - betest
@@ -25,11 +32,6 @@ FE_Test:
   extends: .Job_Only
   image: node:10
   stage: fetest
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - node_modules/
   before_script:
     - npm install
   script:
@@ -40,12 +42,6 @@ BE_Test:
   extends: .Job_Only
   image: maven:3.3.9
   stage: betest
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - .m2/repository/
-      - target/
   script:
     - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
 
@@ -53,11 +49,6 @@ FE_Build:
   extends: .Job_Only
   image: node:10
   stage: febuild
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - src/main/resources/static/
   before_script:
     - npm install
   script:
@@ -68,11 +59,6 @@ BE_Build:
   extends: .Job_Only
   image: maven:3.3.9
   stage: bebuild
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    untracked: true
-    paths:
-      - dist/
   script:
     - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
 
