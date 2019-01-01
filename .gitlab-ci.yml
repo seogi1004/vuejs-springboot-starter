@@ -78,6 +78,8 @@ Patch:
   only:
     variables:
       - $TAG_VERSION =~ /-release$/i
+    changes:
+      - "pom.xml"
     refs:
       - master
   stage: patch
