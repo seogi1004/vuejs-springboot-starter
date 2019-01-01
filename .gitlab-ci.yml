@@ -75,6 +75,7 @@ stages:
 #     - sshpass -e scp -P51022 -oStrictHostKeyChecking=no -r ./dist/vuejs-springboot-starter-$TAG_VERSION.jar root@61.37.50.64:/opt/public
 
 Patch:
+  image: maven:3.3.9
   only:
     # variables:
     #   - $TAG_VERSION =~ /release$/i
@@ -84,7 +85,7 @@ Patch:
       - master
   stage: patch
   before_script:
-    - POM_VERSION=mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version
+    - POM_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version)
     - git config --global user.name "alvin.h"
     - git config --global user.email "seogi777@gmail.com"
   script:
