@@ -78,6 +78,8 @@ Patch:
   only:
     variables:
       - $TAG_VERSION =~ /-release$/i
+    refs:
+      - master
   stage: patch
   before_script:
     - git config --global user.name "alvin.h"
