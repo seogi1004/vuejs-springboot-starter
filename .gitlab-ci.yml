@@ -24,7 +24,6 @@ stages:
     changes:
       - "src/**/*"
       - "package-lock.json"
-      - "webpack.config.json"
       - "pom.xml"
     refs:
       - master
