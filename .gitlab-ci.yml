@@ -81,6 +81,7 @@ Patch:
   script:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
-    - git checkout $CI_BUILD_REF_NAME
+    - git remote remove origin
+    - git remote set-url origin https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/alvin.h/vuejs-springboot-starter.git/
     - git tag -a $TAG_VERSION -m "Version created by gitlab-ci Build"
-    - git push --tags
+    - git push origin $TAG_VERSION
