@@ -4,8 +4,7 @@ module.exports = {
       "@babel/preset-env",
       {
         "useBuiltIns": "entry",
-        "modules": false,
-        "targets": { "chrome": "49" }
+        "modules": false
       }
     ]
   ],
