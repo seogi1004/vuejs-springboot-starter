@@ -90,6 +90,8 @@ Patch:
     # 
     # Do Git stuff, for example:
     #
+    - url_host=`git remote get-url origin | sed -e "s/https:\/\/gitlab-ci-token:.*@//g"`
+    - git remote set-url origin "https://gitlab-ci-token:${SSH_PRIVATE_KEY}@${url_host}"
     - git checkout $CI_COMMIT_REF_NAME
     - git tag $TAG_VERSION
     - git push -u origin $TAG_VERSION
