@@ -85,7 +85,7 @@ Patch:
       - master
   stage: patch
   before_script:
-    - POM_VERSION=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
+    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
     - echo $POM_VERSION
     - git config --global user.name "alvin.h"
     - git config --global user.email "seogi777@gmail.com"
