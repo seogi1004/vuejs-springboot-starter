@@ -78,12 +78,13 @@ stages:
 Patch:
   extends: .Job_Only
   stage: patch
-  
+  variables:
+    CI_REPOSITORY_URL: https://alvin.h:$ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git 
+
   before_script:
-  - git config --global user.name "${GITLAB_USER_NAME}"
-  - git config --global user.email "${GITLAB_USER_EMAIL}"
+  - git config --global user.name "alvin.h"
+  - git config --global user.email "seogi777@gmail.com"
 
   script:
-    - git checkout $CI_COMMIT_REF_NAME
     - git tag $TAG_VERSION
-    - git push -u origin $TAG_VERSION
+    - git push --follow-tags $CI_REPOSITORY_URL HEAD:$CI_COMMIT_REF_NAME
