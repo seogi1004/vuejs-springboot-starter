@@ -85,5 +85,9 @@ Patch:
   - git config --global user.email "seogi777@gmail.com"
   script:
     - git checkout $CI_COMMIT_REF_NAME
-    - git tag $TAG_VERSION
-    - git push --follow-tags $CI_REPOSITORY_URL HEAD:$CI_COMMIT_REF_NAME
+    # - git tag $TAG_VERSION
+    # - git push --follow-tags $CI_REPOSITORY_URL HEAD:$CI_COMMIT_REF_NAME
+    - git remote remove origin
+    - git remote set-url $CI_REPOSITORY_URL
+    - git tag -a $TAG_VERSION -m "Version created by gitlab-ci Build"
+    - git push origin --tags
