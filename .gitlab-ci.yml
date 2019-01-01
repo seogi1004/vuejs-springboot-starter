@@ -6,6 +6,11 @@ stages:
   - deploy
   - patch
 
+variables:
+  MAVEN_CLI_OPTS: "--batch-mode clean verify"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  CI_REPOSITORY_URL: https://alvin.h:$ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git 
+    
 .Job_Only:
   only:
     changes:
@@ -42,7 +47,7 @@ BE_Test:
         - .m2/repository/
         - target/
   script:
-    - mvn test $MAVEN_CLI_OPTS clean verify
+    - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
 
 FE_Build:
   extends: .Job_Only
@@ -68,11 +73,8 @@ BE_Build:
     untracked: true
     paths:
       - dist/
-  variables:
-    MAVEN_CLI_OPTS: "--batch-mode"
-    MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   script:
-    - mvn -DskipTests=true install $MAVEN_CLI_OPTS clean verify
+    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
 
 Deploy:
   extends: .Job_Only
@@ -88,8 +90,6 @@ Deploy:
 Patch:
   extends: .Job_Only
   stage: patch
-  variables:
-    CI_REPOSITORY_URL: https://alvin.h:$ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git 
   before_script:
   - git config --global user.name "alvin.h"
   - git config --global user.email "seogi777@gmail.com"
