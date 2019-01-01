@@ -77,7 +77,7 @@ Deploy:
 Patch:
   only:
     variables:
-      - $TAG_VERSION =~ /-release$/i
+      - $TAG_VERSION =~ /release$/i
     changes:
       - "pom.xml"
     refs:
