@@ -23,8 +23,6 @@ stages:
   only:
     changes:
       - "src/**/*"
-      - "package-lock.json"
-      - "pom.xml"
     refs:
       - master
     
