@@ -79,10 +79,8 @@ Patch:
   extends: .Job_Only
   stage: patch
   script:
-    - export CI_PUSH_REPO=`echo $CI_BUILD_REPO | perl -pe 's#.*@(.+?(\:\d+)?)/#git@\1:#' | perl -pe 's/:gitlab\//:\//'`
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git checkout $CI_BUILD_REF_NAME
-    - git remote set-url --push origin "$CI_PUSH_REPO"
     - git tag -a $TAG_VERSION -m "Version created by gitlab-ci Build"
     - git push --tags
