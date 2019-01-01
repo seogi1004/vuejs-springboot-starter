@@ -74,7 +74,9 @@ Deploy:
     - sshpass -e scp -P51022 -oStrictHostKeyChecking=no -r ./dist/vuejs-springboot-starter-$TAG_VERSION.jar root@61.37.50.64:/opt/public
 
 Patch:
-  extends: .Job_Only
+  only:
+    variables:
+      - $TAG_VERSION =~ /-release$/i
   stage: patch
   before_script:
     - git config --global user.name "alvin.h"
