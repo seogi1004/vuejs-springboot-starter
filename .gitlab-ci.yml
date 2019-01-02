@@ -25,6 +25,7 @@ stages:
       - "src/**/*"
     refs:
       - master
+      - develop
     
 FE_Test:
   extends: .Job_Only
