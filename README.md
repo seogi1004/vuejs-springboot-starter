@@ -1,3 +1,9 @@
+## Pipeline status
+
+[![pipeline status](https://gitlab.com/alvin.h/vuejs-springboot-starter/badges/develop/pipeline.svg)](https://gitlab.com/alvin.h/vuejs-springboot-starter/commits/develop)
+[![coverage report](https://gitlab.com/alvin.h/vuejs-springboot-starter/badges/develop/coverage.svg)](https://gitlab.com/alvin.h/vuejs-springboot-starter/commits/develop)
+
+
 ## Getting started
 
 Enter the command as follows.

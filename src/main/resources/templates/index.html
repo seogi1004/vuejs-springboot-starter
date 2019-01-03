@@ -2,20 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <script type="text/javascript" src="/vendors.js" th:src="@{/vendors.js}"></script>
-    <script type="text/javascript" src="/index.js" th:src="@{/app.js}"></script>
-    <link rel="stylesheet" type="text/css" media="all" href="/app.css" th:href="@{/app.css}" />
 </head>
 <body>
-    <h1>default</h1>
-    <strong><div th:text="${message}"></div></strong>
-    <br/>
+    <div class="title" th:text="${message}"></div>
 
-    <h1>url-loader</h1>
-    <div class="pattern"></div>
-    <br/>
+    <div id="app">
+        <layout :market-list="marketList" :max-market="maxMarket" :min-market="minMarket"></layout>
+    </div>
 
-    <h1>file-loader</h1>
-    <div class="image"></div>
+    <!-- 리소스 로드 영역 -->
+    <link rel="stylesheet" type="text/css" media="all" href="/app.css" th:href="@{/app.css}" />
+    <script type="text/javascript" src="/vendors.js" th:src="@{/vendors.js}"></script>
+    <script type="text/javascript" src="/index.js" th:src="@{/app.js}"></script>
 </body>
 </html>
