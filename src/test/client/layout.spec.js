@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import LayoutComp from '@/layout'
-import { samples } from './data.js'
+import { data } from './samples.js'
 
 describe('layout.vue', () => {
     let cmp ;
@@ -8,9 +8,9 @@ describe('layout.vue', () => {
     beforeEach(() => {
         cmp = shallowMount(LayoutComp, {
             propsData: {
-                marketList: samples,
-                maxMarket: samples[1],
-                minMarket: samples[2]
+                marketList: data,
+                maxMarket: data[1],
+                minMarket: data[2]
             }
         });
     });
