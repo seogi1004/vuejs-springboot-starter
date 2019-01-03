@@ -1,0 +1,1073 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`layout.vue snapshot 1`] = `
+<div>
+  <div
+    style="position: relative; -webkit-user-select: none;"
+    unselectable="on"
+  >
+    <!--function (el) {
+      var obj;
+      var args = [],
+          len = arguments.length - 1;
+
+      while (len-- &gt; 0) args[len] = arguments[len + 1];
+
+      if (shouldNotBeStubbed(el, stubs, modifiedComponents)) {
+        return originalCreateElement.apply(void 0, [el].concat(args));
+      }
+
+      if (isConstructor(el) || isComponentOptions(el)) {
+        if (stubAllComponents) {
+          var stub = createStubFromComponent(el, el.name || 'anonymous');
+          return originalCreateElement.apply(void 0, [stub].concat(args));
+        }
+
+        var Constructor = shouldExtend(el, _Vue) ? extend(el, _Vue) : el;
+        return originalCreateElement.apply(void 0, [Constructor].concat(args));
+      }
+
+      if (typeof el === 'string') {
+        var original = resolveComponent(el, originalComponents);
+
+        if (!original) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        if (original.options && original.options.$_vueTestUtils_original) {
+          original = original.options.$_vueTestUtils_original;
+        }
+
+        if (isDynamicComponent(original)) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        var stub$1 = createStubIfNeeded(stubAllComponents, original, _Vue, el);
+
+        if (stub$1) {
+          Object.assign(vm.$options.components, (obj = {}, obj[el] = stub$1, obj));
+          modifiedComponents.add(el);
+        }
+      }
+
+      return originalCreateElement.apply(void 0, [el].concat(args));
+    }-->
+     
+    <!--function (el) {
+      var obj;
+      var args = [],
+          len = arguments.length - 1;
+
+      while (len-- &gt; 0) args[len] = arguments[len + 1];
+
+      if (shouldNotBeStubbed(el, stubs, modifiedComponents)) {
+        return originalCreateElement.apply(void 0, [el].concat(args));
+      }
+
+      if (isConstructor(el) || isComponentOptions(el)) {
+        if (stubAllComponents) {
+          var stub = createStubFromComponent(el, el.name || 'anonymous');
+          return originalCreateElement.apply(void 0, [stub].concat(args));
+        }
+
+        var Constructor = shouldExtend(el, _Vue) ? extend(el, _Vue) : el;
+        return originalCreateElement.apply(void 0, [Constructor].concat(args));
+      }
+
+      if (typeof el === 'string') {
+        var original = resolveComponent(el, originalComponents);
+
+        if (!original) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        if (original.options && original.options.$_vueTestUtils_original) {
+          original = original.options.$_vueTestUtils_original;
+        }
+
+        if (isDynamicComponent(original)) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        var stub$1 = createStubIfNeeded(stubAllComponents, original, _Vue, el);
+
+        if (stub$1) {
+          Object.assign(vm.$options.components, (obj = {}, obj[el] = stub$1, obj));
+          modifiedComponents.add(el);
+        }
+      }
+
+      return originalCreateElement.apply(void 0, [el].concat(args));
+    }-->
+     
+    <!--function (el) {
+      var obj;
+      var args = [],
+          len = arguments.length - 1;
+
+      while (len-- &gt; 0) args[len] = arguments[len + 1];
+
+      if (shouldNotBeStubbed(el, stubs, modifiedComponents)) {
+        return originalCreateElement.apply(void 0, [el].concat(args));
+      }
+
+      if (isConstructor(el) || isComponentOptions(el)) {
+        if (stubAllComponents) {
+          var stub = createStubFromComponent(el, el.name || 'anonymous');
+          return originalCreateElement.apply(void 0, [stub].concat(args));
+        }
+
+        var Constructor = shouldExtend(el, _Vue) ? extend(el, _Vue) : el;
+        return originalCreateElement.apply(void 0, [Constructor].concat(args));
+      }
+
+      if (typeof el === 'string') {
+        var original = resolveComponent(el, originalComponents);
+
+        if (!original) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        if (original.options && original.options.$_vueTestUtils_original) {
+          original = original.options.$_vueTestUtils_original;
+        }
+
+        if (isDynamicComponent(original)) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        var stub$1 = createStubIfNeeded(stubAllComponents, original, _Vue, el);
+
+        if (stub$1) {
+          Object.assign(vm.$options.components, (obj = {}, obj[el] = stub$1, obj));
+          modifiedComponents.add(el);
+        }
+      }
+
+      return originalCreateElement.apply(void 0, [el].concat(args));
+    }-->
+    <svg
+      buffered-rendering="dynamic"
+      height="500"
+      style="font-family:arial,Tahoma,verdana,classic;background:#fff"
+      width="500"
+    >
+      <g
+        transform="translate(0.5,0.5)"
+      >
+        <defs>
+          <clippath
+            id="axis-clip-id-0"
+          >
+            <rect
+              height="350"
+              width="350"
+              x="0"
+              y="0"
+            />
+          </clippath>
+          <clippath
+            id="axis-clip-rect-id-0"
+          >
+            <rect
+              height="350"
+              width="350"
+              x="0"
+              y="0"
+            />
+          </clippath>
+        </defs>
+        <rect
+          fill="#fff"
+          fill-opacity="0"
+          height="350"
+          rx="0"
+          ry="0"
+          stroke="#fff"
+          stroke-width="0"
+          transform="translate(75,75)"
+          width="350"
+          x="0"
+          y="0"
+        />
+        <g
+          class="grid-panel"
+          display="none"
+          transform="translate(75,75)"
+        >
+          <rect
+            fill="transparent"
+            height="350"
+            stroke="transparent"
+            width="350"
+            x="0"
+            y="0"
+          />
+        </g>
+        <g
+          class="brush-donut"
+          transform="translate(75,75)"
+        >
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="end"
+              transform="translate(113.18840449407031,363.2635964867924)"
+              y="3"
+            >
+              11.4%
+            </text>
+            <path
+              d="M135.914157303131,319.81815114368646 L124.18840449407031,363.2635964867924 L116.18840449407031,363.2635964867924"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <text
+            dy="12"
+            fill="#dcdcdc"
+            font-size="36"
+            font-weight="bold"
+            text-anchor="middle"
+            transform="translate(175,175)"
+          >
+            2884
+          </text>
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="end"
+              transform="translate(40.60144342910128,24.010608862017392)"
+              y="3"
+            >
+              21.8%
+            </text>
+            <path
+              d="M80.07803340700099,58.85431450924415 L51.60144342910128,24.010608862017392 L43.60144342910128,24.010608862017392"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="start"
+              transform="translate(323.4344823979765,313.3356897116586)"
+              y="3"
+            >
+              21.9%
+            </text>
+            <path
+              d="M280.7188326138281,281.41206900896816 L312.4344823979765,313.3356897116586 L320.4344823979765,313.3356897116586"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="end"
+              transform="translate(-17.468596700254636,246.37330321373904)"
+              y="3"
+            >
+              18.3%
+            </text>
+            <path
+              d="M35.4087717690349,229.9025409336454 L-6.468596700254636,246.37330321373904 L-14.468596700254636,246.37330321373904"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="start"
+              transform="translate(330.6191289440843,44.1936257537335)"
+              y="3"
+            >
+              26.6%
+            </text>
+            <path
+              d="M286.2454838031417,74.37971211825655 L319.6191289440843,44.1936257537335 L327.6191289440843,44.1936257537335"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M-87.26647505736861,122.00230461373123 A150,150 0 0,1 -146.99702504099332,-29.8642701082343"
+              fill="transparent"
+              stroke="#FF7800"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M14.031655031656271,149.34226681376106 A150,150 0 0,1 -87.26647505736865,122.00230461373121"
+              fill="transparent"
+              stroke="#FFC000"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M-146.99702504099335,-29.864270108234244 A150,150 0 0,1 -1.6697754290362354e-13,-150"
+              fill="transparent"
+              stroke="#87BB66"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M149.247368077546,15.007435554600983 A150,150 0 0,1 14.031655031656207,149.34226681376106"
+              fill="transparent"
+              stroke="#7BBAE7"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M0,-150 A150,150 0 0,1 149.247368077546,15.007435554600983"
+              fill="transparent"
+              stroke="#7977C2"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+        </g>
+      </g>
+      <g
+        transform="translate(0.5,0.5)"
+      >
+        <text
+          class="widget-title"
+          fill="#333"
+          font-size="13"
+          font-weight="normal"
+          text-anchor="middle"
+          x="250"
+          y="20"
+        >
+          Market cap average
+        </text>
+        <g
+          class="widget-legend"
+          transform="translate(163,489)"
+        >
+          <g
+            transform="translate(0,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#7977C2"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Google
+            </text>
+          </g>
+          <g
+            transform="translate(34.5,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#7BBAE7"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Microsoft
+            </text>
+          </g>
+          <g
+            transform="translate(69,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#FFC000"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Facebook
+            </text>
+          </g>
+          <g
+            transform="translate(103.5,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#FF7800"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Amazon
+            </text>
+          </g>
+          <g
+            transform="translate(138,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#87BB66"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Apple
+            </text>
+          </g>
+        </g>
+        <g
+          class="widget-tooltip"
+        >
+          <g
+            visibility="hidden"
+          >
+            <line
+              stroke-width="0.7"
+              visibility="hidden"
+            />
+            <g>
+              <polygon
+                fill="#fff"
+                fill-opacity="0.7"
+                stroke-width="2"
+              />
+              <g>
+                <text
+                  fill="#333"
+                  font-size="12"
+                  y="0"
+                >
+                  
+                  <tspan
+                    font-weight="bold"
+                    text-anchor="start"
+                    x="7"
+                  />
+                  <tspan
+                    text-anchor="end"
+                  />
+                </text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`rateChart.vue snapshot 1`] = `
+<div>
+  <div
+    style="position: relative; -webkit-user-select: none;"
+    unselectable="on"
+  >
+    <!--function (el) {
+      var obj;
+      var args = [],
+          len = arguments.length - 1;
+
+      while (len-- &gt; 0) args[len] = arguments[len + 1];
+
+      if (shouldNotBeStubbed(el, stubs, modifiedComponents)) {
+        return originalCreateElement.apply(void 0, [el].concat(args));
+      }
+
+      if (isConstructor(el) || isComponentOptions(el)) {
+        if (stubAllComponents) {
+          var stub = createStubFromComponent(el, el.name || 'anonymous');
+          return originalCreateElement.apply(void 0, [stub].concat(args));
+        }
+
+        var Constructor = shouldExtend(el, _Vue) ? extend(el, _Vue) : el;
+        return originalCreateElement.apply(void 0, [Constructor].concat(args));
+      }
+
+      if (typeof el === 'string') {
+        var original = resolveComponent(el, originalComponents);
+
+        if (!original) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        if (original.options && original.options.$_vueTestUtils_original) {
+          original = original.options.$_vueTestUtils_original;
+        }
+
+        if (isDynamicComponent(original)) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        var stub$1 = createStubIfNeeded(stubAllComponents, original, _Vue, el);
+
+        if (stub$1) {
+          Object.assign(vm.$options.components, (obj = {}, obj[el] = stub$1, obj));
+          modifiedComponents.add(el);
+        }
+      }
+
+      return originalCreateElement.apply(void 0, [el].concat(args));
+    }-->
+     
+    <!--function (el) {
+      var obj;
+      var args = [],
+          len = arguments.length - 1;
+
+      while (len-- &gt; 0) args[len] = arguments[len + 1];
+
+      if (shouldNotBeStubbed(el, stubs, modifiedComponents)) {
+        return originalCreateElement.apply(void 0, [el].concat(args));
+      }
+
+      if (isConstructor(el) || isComponentOptions(el)) {
+        if (stubAllComponents) {
+          var stub = createStubFromComponent(el, el.name || 'anonymous');
+          return originalCreateElement.apply(void 0, [stub].concat(args));
+        }
+
+        var Constructor = shouldExtend(el, _Vue) ? extend(el, _Vue) : el;
+        return originalCreateElement.apply(void 0, [Constructor].concat(args));
+      }
+
+      if (typeof el === 'string') {
+        var original = resolveComponent(el, originalComponents);
+
+        if (!original) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        if (original.options && original.options.$_vueTestUtils_original) {
+          original = original.options.$_vueTestUtils_original;
+        }
+
+        if (isDynamicComponent(original)) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        var stub$1 = createStubIfNeeded(stubAllComponents, original, _Vue, el);
+
+        if (stub$1) {
+          Object.assign(vm.$options.components, (obj = {}, obj[el] = stub$1, obj));
+          modifiedComponents.add(el);
+        }
+      }
+
+      return originalCreateElement.apply(void 0, [el].concat(args));
+    }-->
+     
+    <!--function (el) {
+      var obj;
+      var args = [],
+          len = arguments.length - 1;
+
+      while (len-- &gt; 0) args[len] = arguments[len + 1];
+
+      if (shouldNotBeStubbed(el, stubs, modifiedComponents)) {
+        return originalCreateElement.apply(void 0, [el].concat(args));
+      }
+
+      if (isConstructor(el) || isComponentOptions(el)) {
+        if (stubAllComponents) {
+          var stub = createStubFromComponent(el, el.name || 'anonymous');
+          return originalCreateElement.apply(void 0, [stub].concat(args));
+        }
+
+        var Constructor = shouldExtend(el, _Vue) ? extend(el, _Vue) : el;
+        return originalCreateElement.apply(void 0, [Constructor].concat(args));
+      }
+
+      if (typeof el === 'string') {
+        var original = resolveComponent(el, originalComponents);
+
+        if (!original) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        if (original.options && original.options.$_vueTestUtils_original) {
+          original = original.options.$_vueTestUtils_original;
+        }
+
+        if (isDynamicComponent(original)) {
+          return originalCreateElement.apply(void 0, [el].concat(args));
+        }
+
+        var stub$1 = createStubIfNeeded(stubAllComponents, original, _Vue, el);
+
+        if (stub$1) {
+          Object.assign(vm.$options.components, (obj = {}, obj[el] = stub$1, obj));
+          modifiedComponents.add(el);
+        }
+      }
+
+      return originalCreateElement.apply(void 0, [el].concat(args));
+    }-->
+    <svg
+      buffered-rendering="dynamic"
+      height="500"
+      style="font-family:arial,Tahoma,verdana,classic;background:#fff"
+      width="500"
+    >
+      <g
+        transform="translate(0.5,0.5)"
+      >
+        <defs>
+          <clippath
+            id="axis-clip-id-0"
+          >
+            <rect
+              height="350"
+              width="350"
+              x="0"
+              y="0"
+            />
+          </clippath>
+          <clippath
+            id="axis-clip-rect-id-0"
+          >
+            <rect
+              height="350"
+              width="350"
+              x="0"
+              y="0"
+            />
+          </clippath>
+        </defs>
+        <rect
+          fill="#fff"
+          fill-opacity="0"
+          height="350"
+          rx="0"
+          ry="0"
+          stroke="#fff"
+          stroke-width="0"
+          transform="translate(75,75)"
+          width="350"
+          x="0"
+          y="0"
+        />
+        <g
+          class="grid-panel"
+          display="none"
+          transform="translate(75,75)"
+        >
+          <rect
+            fill="transparent"
+            height="350"
+            stroke="transparent"
+            width="350"
+            x="0"
+            y="0"
+          />
+        </g>
+        <g
+          class="brush-donut"
+          transform="translate(75,75)"
+        >
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="end"
+              transform="translate(113.18840449407031,363.2635964867924)"
+              y="3"
+            >
+              11.4%
+            </text>
+            <path
+              d="M135.914157303131,319.81815114368646 L124.18840449407031,363.2635964867924 L116.18840449407031,363.2635964867924"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <text
+            dy="12"
+            fill="#dcdcdc"
+            font-size="36"
+            font-weight="bold"
+            text-anchor="middle"
+            transform="translate(175,175)"
+          >
+            2884
+          </text>
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="end"
+              transform="translate(40.60144342910128,24.010608862017392)"
+              y="3"
+            >
+              21.8%
+            </text>
+            <path
+              d="M80.07803340700099,58.85431450924415 L51.60144342910128,24.010608862017392 L43.60144342910128,24.010608862017392"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="start"
+              transform="translate(323.4344823979765,313.3356897116586)"
+              y="3"
+            >
+              21.9%
+            </text>
+            <path
+              d="M280.7188326138281,281.41206900896816 L312.4344823979765,313.3356897116586 L320.4344823979765,313.3356897116586"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="end"
+              transform="translate(-17.468596700254636,246.37330321373904)"
+              y="3"
+            >
+              18.3%
+            </text>
+            <path
+              d="M35.4087717690349,229.9025409336454 L-6.468596700254636,246.37330321373904 L-14.468596700254636,246.37330321373904"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <g
+            visibility="visible"
+          >
+            <text
+              fill="#333"
+              fill-opacity="1"
+              font-size="11"
+              text-anchor="start"
+              transform="translate(330.6191289440843,44.1936257537335)"
+              y="3"
+            >
+              26.6%
+            </text>
+            <path
+              d="M286.2454838031417,74.37971211825655 L319.6191289440843,44.1936257537335 L327.6191289440843,44.1936257537335"
+              fill="transparent"
+              stroke="#a9a9a9"
+              stroke-opacity="1"
+              stroke-width="0.7"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M-87.26647505736861,122.00230461373123 A150,150 0 0,1 -146.99702504099332,-29.8642701082343"
+              fill="transparent"
+              stroke="#FF7800"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M14.031655031656271,149.34226681376106 A150,150 0 0,1 -87.26647505736865,122.00230461373121"
+              fill="transparent"
+              stroke="#FFC000"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M-146.99702504099335,-29.864270108234244 A150,150 0 0,1 -1.6697754290362354e-13,-150"
+              fill="transparent"
+              stroke="#87BB66"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M149.247368077546,15.007435554600983 A150,150 0 0,1 14.031655031656207,149.34226681376106"
+              fill="transparent"
+              stroke="#7BBAE7"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+          <g
+            transform="translate(175,175)"
+          >
+            <path
+              d="M0,-150 A150,150 0 0,1 149.247368077546,15.007435554600983"
+              fill="transparent"
+              stroke="#7977C2"
+              stroke-width="50"
+              style="pointer-events:stroke"
+            />
+          </g>
+        </g>
+      </g>
+      <g
+        transform="translate(0.5,0.5)"
+      >
+        <text
+          class="widget-title"
+          fill="#333"
+          font-size="13"
+          font-weight="normal"
+          text-anchor="middle"
+          x="250"
+          y="20"
+        >
+          Market cap average
+        </text>
+        <g
+          class="widget-legend"
+          transform="translate(163,489)"
+        >
+          <g
+            transform="translate(0,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#7977C2"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Google
+            </text>
+          </g>
+          <g
+            transform="translate(34.5,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#7BBAE7"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Microsoft
+            </text>
+          </g>
+          <g
+            transform="translate(69,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#FFC000"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Facebook
+            </text>
+          </g>
+          <g
+            transform="translate(103.5,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#FF7800"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Amazon
+            </text>
+          </g>
+          <g
+            transform="translate(138,0)"
+          >
+            <circle
+              cx="6"
+              cy="-2"
+              fill="#87BB66"
+              r="6"
+            />
+            <text
+              fill="#333"
+              font-size="12"
+              text-anchor="start"
+              x="14.399999999999999"
+              y="0"
+            >
+              Apple
+            </text>
+          </g>
+        </g>
+        <g
+          class="widget-tooltip"
+        >
+          <g
+            visibility="hidden"
+          >
+            <line
+              stroke-width="0.7"
+              visibility="hidden"
+            />
+            <g>
+              <polygon
+                fill="#fff"
+                fill-opacity="0.7"
+                stroke-width="2"
+              />
+              <g>
+                <text
+                  fill="#333"
+                  font-size="12"
+                  y="0"
+                >
+                  
+                  <tspan
+                    font-weight="bold"
+                    text-anchor="start"
+                    x="7"
+                  />
+                  <tspan
+                    text-anchor="end"
+                  />
+                </text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+`;

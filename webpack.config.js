@@ -11,7 +11,7 @@ module.exports = (env) => {
     return {
         mode: !env ? 'development' : env,
         entry: {
-            vendors: [ 'jquery', 'moment' ],
+            vendors: [ 'vue', 'vue-graph' ],
             app: clientPath + '/index.js'
         },
         output: {
@@ -88,6 +88,9 @@ module.exports = (env) => {
             ])
         },
         resolve: {
+            alias: {
+                vue$: 'vue/dist/vue.esm.js'
+            },
             extensions: [ '.js', '.sass', '.scss', '.css', '.vue' ]
         },
         plugins: [

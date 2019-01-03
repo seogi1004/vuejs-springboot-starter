@@ -1,5 +1,18 @@
-strong {
-    color : red;
+html {
+  padding: 0;
+}
+
+body {
+  margin: 0;
+}
+
+.title {
+  background: #000;
+  height: 40px;
+  line-height: 40px;
+  color: #a9a9a9;
+  padding-left: 15px;
+  margin-bottom: 150px;
 }
 
 .pattern {
