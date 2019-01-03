@@ -52,7 +52,7 @@ FE_Test:
   coverage: /All files\s*\|\s*([\d\.]+)/
 
 FE_Build:
-  extends: .Job_Cache_FE
+  extends: .Job_Only
   image: node:10
   stage: febuild
   before_script:
@@ -69,7 +69,7 @@ BE_Test:
     - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
 
 BE_Build:
-  extends: .Job_Cache_BE
+  extends: .Job_Only
   image: maven:3.3.9
   stage: bebuild
   script:
