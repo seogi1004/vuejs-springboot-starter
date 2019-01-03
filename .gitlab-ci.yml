@@ -10,6 +10,8 @@ cache:
   paths:
     - src/main/resources/static/
     - dist/
+    - node_modules/
+    - .m2/repository/
     
 stages:
   - fetest
@@ -26,23 +28,9 @@ stages:
     refs:
       - master
       - develop
-      
-.Job_Cache_FE:
-  extends: .Job_Only
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    paths:
-      - node_modules/
-      
-.Job_Cache_BE:
-  extends: .Job_Only
-  cache:
-    key: "$CI_BUILD_REF_NAME"
-    paths:
-      - .m2/repository/
-    
+   
 FE_Test:
-  extends: .Job_Cache_FE
+  extends: .Job_Only
   image: node:10
   stage: fetest
   before_script:
@@ -62,7 +50,7 @@ FE_Build:
     - ls -all ./src/main/resources/static
     
 BE_Test:
-  extends: .Job_Cache_BE
+  extends: .Job_Only
   image: maven:3.3.9
   stage: betest
   script:
