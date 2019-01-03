@@ -13,8 +13,8 @@ cache:
     
 stages:
   - fetest
-  - betest
   - febuild
+  - betest
   - bebuild
   - deploy
   - patch
@@ -26,9 +26,23 @@ stages:
     refs:
       - master
       - develop
+      
+.Job_Cache_FE:
+  extends: .Job_Only
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    paths:
+      - node_modules/
+      
+.Job_Cache_BE:
+  extends: .Job_Only
+  cache:
+    key: "$CI_BUILD_REF_NAME"
+    paths:
+      - .m2/repository/
     
 FE_Test:
-  extends: .Job_Only
+  extends: .Job_Cache_FE
   image: node:10
   stage: fetest
   before_script:
@@ -37,15 +51,8 @@ FE_Test:
     - npm test
   coverage: /All files\s*\|\s*([\d\.]+)/
 
-BE_Test:
-  extends: .Job_Only
-  image: maven:3.3.9
-  stage: betest
-  script:
-    - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
-
 FE_Build:
-  extends: .Job_Only
+  extends: .Job_Cache_FE
   image: node:10
   stage: febuild
   before_script:
@@ -53,9 +60,16 @@ FE_Build:
   script:
     - npm run dist
     - ls -all ./src/main/resources/static
+    
+BE_Test:
+  extends: .Job_Cache_BE
+  image: maven:3.3.9
+  stage: betest
+  script:
+    - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
 
 BE_Build:
-  extends: .Job_Only
+  extends: .Job_Cache_BE
   image: maven:3.3.9
   stage: bebuild
   script:
