@@ -38,6 +38,6 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "vue": "^2.5.21",
-    "vue-graph": "^0.8.0"
+    "vue-graph": "^0.7.3"
   }
 }

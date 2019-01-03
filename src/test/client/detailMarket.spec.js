@@ -1,21 +1,8 @@
-import { mount, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import DetailMarketComp from '@/detailMarket'
 import { samples } from './data.js'
 
 describe('detailMarket.vue', () => {
-    it('snapshot', () => {
-        const cmp = mount(DetailMarketComp, {
-            propsData: {
-                title: 'Max Market Cap',
-                data: samples[1]
-            }
-        });
-
-        cmp.vm.$nextTick(() => {
-            expect(cmp.vm.$el).toMatchSnapshot();
-        });
-    });
-
     it('computed', () => {
         const cmp = shallowMount(DetailMarketComp, {
             propsData: {
