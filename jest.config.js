@@ -1,4 +1,5 @@
 module.exports = {
+    "setupFiles": [ "./src/test/client/setup.js" ],
     "verbose": true,
     "moduleFileExtensions": [
         "js",
