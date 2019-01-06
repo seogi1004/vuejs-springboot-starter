@@ -60,6 +60,6 @@
 <style scoped>
     div {
         position: absolute;
-        right: 15px;
+        right: 16px;
     }
 </style>
