@@ -4,8 +4,8 @@
             <rate-chart :names="rateNames" :values="rateValues" :value-sum="rateValueSum"></rate-chart>
         </div>
         <div class="col table">
-            <detail-market :title="'Max Market Cap'" :data="maxMarket"></detail-market><br/>
-            <detail-market :title="'Min Market Cap'" :data="minMarket"></detail-market>
+            <detail-market :title="'Max market cap'" :data="maxMarket"></detail-market><br/>
+            <detail-market :title="'Min market cap'" :data="minMarket"></detail-market>
         </div>
     </div>
 </template>
