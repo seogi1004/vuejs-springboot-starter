@@ -26,7 +26,6 @@ stages:
     changes:
       - "src/**/*"
     refs:
-      - master
       - merge_requests
    
 FE_Test:
@@ -82,7 +81,7 @@ Patch:
     changes:
       - "pom.xml"
     refs:
-      - master
+      - merge_requests
   stage: patch
   before_script:
     - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
