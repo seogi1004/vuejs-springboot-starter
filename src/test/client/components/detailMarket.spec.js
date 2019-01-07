@@ -1,5 +1,5 @@
 import { shallow } from 'vue-test-utils'
-import DetailMarketComp from '@/detailMarket'
+import DetailMarketComp from '@/components/detailMarket'
 import { data } from '../samples.js'
 
 describe('detailMarket.vue', () => {

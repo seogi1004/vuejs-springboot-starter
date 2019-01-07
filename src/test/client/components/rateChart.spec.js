@@ -1,5 +1,5 @@
 import { mount } from 'vue-test-utils'
-import RateChartComp from '@/rateChart'
+import RateChartComp from '@/components/rateChart'
 
 describe('rateChart.vue', () => {
     let cmp;

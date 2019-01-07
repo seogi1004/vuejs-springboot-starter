@@ -1,5 +1,5 @@
 import { shallow } from 'vue-test-utils'
-import LayoutComp from '@/layout'
+import LayoutComp from '@/components/layout'
 import { data } from '../samples.js'
 
 describe('layout.vue', () => {

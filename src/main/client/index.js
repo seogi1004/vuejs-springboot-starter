@@ -1,7 +1,7 @@
 import './index.scss'
 import '@babel/polyfill'
 import Vue from 'vue'
-import LayoutComp from './layout'
+import LayoutComp from './components/layout'
 
 async function fetchMarketDatas(urls) {
     const result = [];
