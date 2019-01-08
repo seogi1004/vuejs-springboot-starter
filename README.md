@@ -11,7 +11,7 @@ Enter the command as follows.
  1. mvn install
  2. npm install
  3. npm start
- 4. Run the MarketValueApplication class in the development tool
+ 4. (Running the main class in the IDE)
 
 
 ## Links 
