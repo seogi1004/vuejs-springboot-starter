@@ -1,6 +1,6 @@
 # 사용자 프로파일 설정에서 PERSONAL_ACCESS_TOKEN을 발급해야함
 variables:
-  MAVEN_CLI_OPTS: "--batch-mode clean verify"
+  MAVEN_CLI_OPTS: "--batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   CI_REPOSITORY_URL: https://alvin.h:$ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
 
