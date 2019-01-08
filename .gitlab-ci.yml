@@ -72,7 +72,7 @@ Deploy:
     - ls -all ./dist
     - sshpass -V
     - export SSHPASS=$SSH_PASSWORD
-    - sshpass -e scp -oStrictHostKeyChecking=no -r ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@61.37.50.64:/opt/public -P51022
+    - sshpass -e scp -r -oStrictHostKeyChecking=no -P51022 ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@61.37.50.64:/opt/public
 
 Patch:
   image: maven:3.3.9
