@@ -6,7 +6,7 @@ variables:
 
 # untracked 옵션이 true면, Git에 추가되지 않은 모든 파일들을 캐싱함
 cache:
-  key: "$CI_BUILD_REF_NAME"
+  key: "$CI_COMMIT_REF_NAME"
   paths:
     - src/main/resources/static/
     - dist/
