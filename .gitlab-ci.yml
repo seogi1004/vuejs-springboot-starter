@@ -53,7 +53,7 @@ BE_Test:
   image: maven:3.3.9
   stage: betest
   script:
-    - mvn test $MAVEN_OPTS $MAVEN_CLI_OPTS
+    - mvn test $MAVEN_OPTS
 
 BE_Build:
   extends: .Job_Only
@@ -73,7 +73,7 @@ Deploy:
     - ls -all ./dist
     - sshpass -V
     - export SSHPASS=$SSH_PASSWORD
-    - sshpass -e scp -P51022 ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@61.37.50.64:/opt/public -r -oStrictHostKeyChecking=no
+    - sshpass -e scp -r -oStrictHostKeyChecking=no -P51022 ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@61.37.50.64:/opt/public
 
 Patch:
   image: maven:3.3.9
