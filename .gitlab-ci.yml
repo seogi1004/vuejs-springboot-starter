@@ -67,12 +67,10 @@ BE_Report:
   extends: .Job_Only
   image: maven:3.3.9
   stage: bereport
+  before_script:
+    - mvn clean package jacoco:report
   script:
-    - mvn sonar:sonar \
-      -Dsonar.projectKey=vuejs-springboot-starter \
-      -Dsonar.organization=alvin \
-      -Dsonar.host.url=https://sonarcloud.io \
-      -Dsonar.login=f383e836d32c4e9652edcaec0652fc255d253746
+    - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f383e836d32c4e9652edcaec0652fc255d253746
 
 #Deploy:
 #  extends: .Job_Only
