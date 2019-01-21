@@ -100,7 +100,7 @@ stages:
 Report:
   extends: .Job_Only
   image: maven:3.3.9
-  stage: bereport
+  stage: report
   script:
     - mvn sonar:sonar \
       -Dsonar.projectKey=vuejs-springboot-starter \
