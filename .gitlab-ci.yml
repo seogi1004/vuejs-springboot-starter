@@ -18,9 +18,9 @@ stages:
 #  - febuild
 #  - betest
 #  - bebuild
-  - bereport
 #  - deploy
 #  - patch
+  - report
     
 .Job_Only:
   only:
@@ -62,20 +62,7 @@ stages:
 #  stage: bebuild
 #  script:
 #    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
-
-BE_Report:
-  extends: .Job_Only
-  image: maven:3.3.9
-  stage: bereport
-  before_script:
-    - mvn clean verify sonar:sonar
-  script:
-    - mvn sonar:sonar \
-      -Dsonar.projectKey=vuejs-springboot-starter \
-      -Dsonar.organization=alvin \
-      -Dsonar.host.url=https://sonarcloud.io \
-      -Dsonar.login=5b4598bf2774b7bf8179536aef1836f1fec57e8c $MAVEN_OPTS
-
+#
 #Deploy:
 #  extends: .Job_Only
 #  image: maven:3.3.9
@@ -109,3 +96,14 @@ BE_Report:
 #    - git remote add origin $CI_REPOSITORY_URL
 #    - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
 #    - git push origin --tags
+
+Report:
+  extends: .Job_Only
+  image: maven:3.3.9
+  stage: bereport
+  script:
+    - mvn sonar:sonar \
+      -Dsonar.projectKey=vuejs-springboot-starter \
+      -Dsonar.organization=alvin \
+      -Dsonar.host.url=https://sonarcloud.io \
+      -Dsonar.login=5b4598bf2774b7bf8179536aef1836f1fec57e8c $MAVEN_OPTS
