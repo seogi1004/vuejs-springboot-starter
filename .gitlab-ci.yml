@@ -72,7 +72,8 @@ Deploy:
     - ls -all ./dist
     - sshpass -V
     - export SSHPASS=$SSH_PASSWORD
-    - sshpass -e scp -P51022 ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@61.37.50.64:/opt/public -r -oStrictHostKeyChecking=no
+    # SSH_COMMAND 변수 값은 USERNAME@IP:UPLOAD_PATH, 포트가 다르면 -P 옵션을 줄것
+    - sshpass -e scp ./dist/vuejs-springboot-starter-$POM_VERSION.jar $SSH_COMMAND -r -oStrictHostKeyChecking=no
 
 Patch:
   image: maven:3.3.9
