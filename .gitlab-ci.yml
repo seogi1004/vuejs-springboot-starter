@@ -1,8 +1,9 @@
-# 사용자 프로파일 설정에서 PERSONAL_ACCESS_TOKEN을 발급해야함
-variables:
-  CI_REPOSITORY_URL: https://alvin.h:$ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
+# Environment variables
+#
+# GIT_TOKEN (patch)
+# SONAR_TOKEN (backend)
+# SSH_PASSWORD (deploy)
 
-# untracked 옵션이 true면, Git에 추가되지 않은 모든 파일들을 캐싱함
 cache:
   key: "$CI_BUILD_REF_NAME"
   paths:
@@ -43,7 +44,7 @@ Backend:
   script:
     - mvn install jacoco:report -Dmaven.repo.local=.m2/repository --batch-mode
   after_script:
-    - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=08915ed67fbfd94140531366432add5f6e83a048
+    - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
 Deploy:
   extends: .Job_Only
@@ -67,6 +68,9 @@ Patch:
     refs:
       - merge_requests
   stage: patch
+  variables:
+    # 사용자 프로파일 설정에서 PERSONAL_ACCESS_TOKEN을 발급해야함
+    CI_REPOSITORY_URL: https://alvin.h:$GIT_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
   before_script:
     - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
     - echo $POM_VERSION
