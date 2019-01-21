@@ -14,12 +14,13 @@ cache:
     - .m2/repository/
     
 stages:
-  - fetest
-  - febuild
-  - betest
-  - bebuild
+#  - fetest
+#  - febuild
+#  - betest
+#  - bebuild
+  - bereport
 #  - deploy
-  - patch
+#  - patch
     
 .Job_Only:
   only:
@@ -28,39 +29,50 @@ stages:
     refs:
       - merge_requests
    
-FE_Test:
-  extends: .Job_Only
-  image: node:10
-  stage: fetest
-  before_script:
-    - npm install
-  script:
-    - npm test
-  coverage: /All files\s*\|\s*([\d\.]+)/
+#FE_Test:
+#  extends: .Job_Only
+#  image: node:10
+#  stage: fetest
+#  before_script:
+#    - npm install
+#  script:
+#    - npm test
+#  coverage: /All files\s*\|\s*([\d\.]+)/
+#
+#FE_Build:
+#  extends: .Job_Only
+#  image: node:10
+#  stage: febuild
+#  before_script:
+#    - npm install
+#  script:
+#    - npm run dist
+#    - ls -all ./src/main/resources/static
+#
+#BE_Test:
+#  extends: .Job_Only
+#  image: maven:3.3.9
+#  stage: betest
+#  script:
+#    - mvn test $MAVEN_OPTS
+#
+#BE_Build:
+#  extends: .Job_Only
+#  image: maven:3.3.9
+#  stage: bebuild
+#  script:
+#    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
 
-FE_Build:
-  extends: .Job_Only
-  image: node:10
-  stage: febuild
-  before_script:
-    - npm install
-  script:
-    - npm run dist
-    - ls -all ./src/main/resources/static
-
-BE_Test:
+BE_Report:
   extends: .Job_Only
   image: maven:3.3.9
-  stage: betest
+  stage: bereport
   script:
-    - mvn test $MAVEN_OPTS
-
-BE_Build:
-  extends: .Job_Only
-  image: maven:3.3.9
-  stage: bebuild
-  script:
-    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
+    - mvn sonar:sonar \
+      -Dsonar.projectKey=vuejs-springboot-starter \
+      -Dsonar.organization=alvin \
+      -Dsonar.host.url=https://sonarcloud.io \
+      -Dsonar.login=f383e836d32c4e9652edcaec0652fc255d253746
 
 #Deploy:
 #  extends: .Job_Only
@@ -75,23 +87,23 @@ BE_Build:
 #    - export SSHPASS=$SSH_PASSWORD
 #    # SSH_COMMAND 변수 값은 USERNAME@IP:UPLOAD_PATH, 포트가 다르면 -P 옵션을 줄것
 #    - sshpass -e scp -r -oStrictHostKeyChecking=no ./dist/vuejs-springboot-starter-$POM_VERSION.jar $SSH_COMMAND
-
-Patch:
-  image: maven:3.3.9
-  only:
-    changes:
-      - "pom.xml"
-    refs:
-      - merge_requests
-  stage: patch
-  before_script:
-    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-    - echo $POM_VERSION
-    - git config --global user.name "alvin.h"
-    - git config --global user.email "seogi777@gmail.com"
-  script:
-    - git checkout $CI_COMMIT_REF_NAME
-    - git remote remove origin
-    - git remote add origin $CI_REPOSITORY_URL
-    - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
-    - git push origin --tags
+#
+#Patch:
+#  image: maven:3.3.9
+#  only:
+#    changes:
+#      - "pom.xml"
+#    refs:
+#      - merge_requests
+#  stage: patch
+#  before_script:
+#    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+#    - echo $POM_VERSION
+#    - git config --global user.name "alvin.h"
+#    - git config --global user.email "seogi777@gmail.com"
+#  script:
+#    - git checkout $CI_COMMIT_REF_NAME
+#    - git remote remove origin
+#    - git remote add origin $CI_REPOSITORY_URL
+#    - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
+#    - git push origin --tags
