@@ -1,27 +1,21 @@
 # 사용자 프로파일 설정에서 PERSONAL_ACCESS_TOKEN을 발급해야함
 variables:
-  MAVEN_CLI_OPTS: "--batch-mode"
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   CI_REPOSITORY_URL: https://alvin.h:$ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
 
 # untracked 옵션이 true면, Git에 추가되지 않은 모든 파일들을 캐싱함
 cache:
   key: "$CI_BUILD_REF_NAME"
   paths:
+    - .m2/repository/
     - src/main/resources/static/
     - dist/
-    - node_modules/
-    - .m2/repository/
 
 stages:
-#  - fetest
-#  - febuild
-#  - betest
-  - bebuild
+  - frontend
+  - backend
   - deploy
-#  - patch
-#  - report
-    
+  - patch
+
 .Job_Only:
   only:
     changes:
@@ -29,39 +23,27 @@ stages:
     refs:
       - merge_requests
    
-#FE_Test:
-#  extends: .Job_Only
-#  image: node:10
-#  stage: fetest
-#  before_script:
-#    - npm install
-#  script:
-#    - npm test
-#  coverage: /All files\s*\|\s*([\d\.]+)/
-#
-#FE_Build:
-#  extends: .Job_Only
-#  image: node:10
-#  stage: febuild
-#  before_script:
-#    - npm install
-#  script:
-#    - npm run dist
-#    - ls -all ./src/main/resources/static
-#
-#BE_Test:
-#  extends: .Job_Only
-#  image: maven:3.3.9
-#  stage: betest
-#  script:
-#    - mvn test $MAVEN_OPTS
+Frontend:
+  extends: .Job_Only
+  image: node:10
+  stage: frontend
+  before_script:
+    - npm install
+  script:
+    - npm test
+  after_script:
+    - npm run dist
+    - ls -all ./src/main/resources/static
+  coverage: /All files\s*\|\s*([\d\.]+)/
 
-BE_Build:
+Backend:
   extends: .Job_Only
   image: maven:3.3.9
-  stage: bebuild
+  stage: backend
   script:
-    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
+    - mvn install jacoco:report -Dmaven.repo.local=.m2/repository --batch-mode
+  after_script:
+    - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=08915ed67fbfd94140531366432add5f6e83a048
 
 Deploy:
   extends: .Job_Only
@@ -77,31 +59,22 @@ Deploy:
     # SSH 포트가 22가 아니라면 -P 옵션을 줄것
     - sshpass -e scp -r -oStrictHostKeyChecking=no ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@180.228.199.230:/opt/
 
-#Patch:
-#  image: maven:3.3.9
-#  only:
-#    changes:
-#      - "pom.xml"
-#    refs:
-#      - merge_requests
-#  stage: patch
-#  before_script:
-#    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-#    - echo $POM_VERSION
-#    - git config --global user.name "alvin.h"
-#    - git config --global user.email "seogi777@gmail.com"
-#  script:
-#    - git checkout $CI_COMMIT_REF_NAME
-#    - git remote remove origin
-#    - git remote add origin $CI_REPOSITORY_URL
-#    - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
-#    - git push origin --tags
-#
-#Report:
-#  extends: .Job_Only
-#  image: maven:3.3.9
-#  stage: report
-#  before_script:
-#    - mvn clean package jacoco:report
-#  script:
-#    - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=08915ed67fbfd94140531366432add5f6e83a048 $MAVEN_OPTS
+Patch:
+  image: maven:3.3.9
+  only:
+    changes:
+      - "pom.xml"
+    refs:
+      - merge_requests
+  stage: patch
+  before_script:
+    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+    - echo $POM_VERSION
+    - git config --global user.name "alvin.h"
+    - git config --global user.email "seogi777@gmail.com"
+  script:
+    - git checkout $CI_COMMIT_REF_NAME
+    - git remote remove origin
+    - git remote add origin $CI_REPOSITORY_URL
+    - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
+    - git push origin --tags
