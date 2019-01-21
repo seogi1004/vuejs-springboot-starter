@@ -17,10 +17,10 @@ stages:
 #  - fetest
 #  - febuild
 #  - betest
-#  - bebuild
-#  - deploy
+  - bebuild
+  - deploy
 #  - patch
-  - report
+#  - report
     
 .Job_Only:
   only:
@@ -55,28 +55,28 @@ stages:
 #  stage: betest
 #  script:
 #    - mvn test $MAVEN_OPTS
-#
-#BE_Build:
-#  extends: .Job_Only
-#  image: maven:3.3.9
-#  stage: bebuild
-#  script:
-#    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
 
-#Deploy:
-#  extends: .Job_Only
-#  image: maven:3.3.9
-#  stage: deploy
-#  before_script:
-#    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-#    - apt-get update -qq && apt-get install -y -qq sshpass
-#  script:
-#    - ls -all ./dist
-#    - sshpass -V
-#    - export SSHPASS=$SSH_PASSWORD
-#    # SSH_COMMAND 변수 값은 USERNAME@IP:UPLOAD_PATH, 포트가 다르면 -P 옵션을 줄것
-#    - sshpass -e scp -r -oStrictHostKeyChecking=no ./dist/vuejs-springboot-starter-$POM_VERSION.jar $SSH_COMMAND
-#
+BE_Build:
+  extends: .Job_Only
+  image: maven:3.3.9
+  stage: bebuild
+  script:
+    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
+
+Deploy:
+  extends: .Job_Only
+  image: maven:3.3.9
+  stage: deploy
+  before_script:
+    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+    - apt-get update -qq && apt-get install -y -qq sshpass
+  script:
+    - ls -all ./dist
+    - sshpass -V
+    - export SSHPASS=$SSH_PASSWORD
+    # SSH 포트가 22가 아니라면 -P 옵션을 줄것
+    - sshpass -e scp -r -oStrictHostKeyChecking=no ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@180.228.199.230:/opt/
+
 #Patch:
 #  image: maven:3.3.9
 #  only:
@@ -96,12 +96,12 @@ stages:
 #    - git remote add origin $CI_REPOSITORY_URL
 #    - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
 #    - git push origin --tags
-
-Report:
-  extends: .Job_Only
-  image: maven:3.3.9
-  stage: report
-  before_script:
-    - mvn clean package jacoco:report
-  script:
-    - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=08915ed67fbfd94140531366432add5f6e83a048 $MAVEN_OPTS
+#
+#Report:
+#  extends: .Job_Only
+#  image: maven:3.3.9
+#  stage: report
+#  before_script:
+#    - mvn clean package jacoco:report
+#  script:
+#    - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=08915ed67fbfd94140531366432add5f6e83a048 $MAVEN_OPTS
