@@ -67,6 +67,8 @@ BE_Report:
   extends: .Job_Only
   image: maven:3.3.9
   stage: bereport
+  before_script:
+    - mvn clean package jacoco:report
   script:
     - mvn sonar:sonar \
       -Dsonar.projectKey=vuejs-springboot-starter \
