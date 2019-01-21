@@ -14,9 +14,9 @@ cache:
     - .m2/repository/
     
 stages:
-  - fetest
-  - febuild
-  - betest
+#  - fetest
+#  - febuild
+#  - betest
   - bebuild
   - deploy
   - patch
@@ -74,7 +74,7 @@ Deploy:
     - sshpass -V
     - export SSHPASS=$SSH_PASSWORD
     # SSH_COMMAND 변수 값은 USERNAME@IP:UPLOAD_PATH, 포트가 다르면 -P 옵션을 줄것
-    - sshpass -e scp ./dist/vuejs-springboot-starter-$POM_VERSION.jar $SSH_COMMAND -r -oStrictHostKeyChecking=no
+    - sshpass -e scp -r -oStrictHostKeyChecking=no ./dist/vuejs-springboot-starter-$POM_VERSION.jar $SSH_COMMAND
 
 Patch:
   image: maven:3.3.9
