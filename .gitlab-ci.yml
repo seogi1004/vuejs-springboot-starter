@@ -102,4 +102,4 @@ Report:
   image: maven:3.3.9
   stage: report
   script:
-    - mvn clear package sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=08915ed67fbfd94140531366432add5f6e83a048 $MAVEN_OPTS
+    - mvn package sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=08915ed67fbfd94140531366432add5f6e83a048 $MAVEN_OPTS
