@@ -1,6 +1,7 @@
 # 사용자 프로파일 설정에서 PERSONAL_ACCESS_TOKEN을 발급해야함
 variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository --batch-mode clean verify"
+  MAVEN_CLI_OPTS: "--batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   CI_REPOSITORY_URL: https://alvin.h:$ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
 
 # untracked 옵션이 true면, Git에 추가되지 않은 모든 파일들을 캐싱함
@@ -59,7 +60,7 @@ BE_Build:
   image: maven:3.3.9
   stage: bebuild
   script:
-    - mvn install -DskipTests=true $MAVEN_OPTS
+    - mvn install -DskipTests=true $MAVEN_OPTS $MAVEN_CLI_OPTS
 
 Deploy:
   extends: .Job_Only
