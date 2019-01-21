@@ -101,5 +101,7 @@ Report:
   extends: .Job_Only
   image: maven:3.3.9
   stage: report
+  before_script:
+    - mvn clean package sonar:sonar
   script:
     - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=5b4598bf2774b7bf8179536aef1836f1fec57e8c $MAVEN_OPTS
