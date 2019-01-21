@@ -28,32 +28,32 @@ stages:
     refs:
       - merge_requests
    
-FE_Test:
-  extends: .Job_Only
-  image: node:10
-  stage: fetest
-  before_script:
-    - npm install
-  script:
-    - npm test
-  coverage: /All files\s*\|\s*([\d\.]+)/
-
-FE_Build:
-  extends: .Job_Only
-  image: node:10
-  stage: febuild
-  before_script:
-    - npm install
-  script:
-    - npm run dist
-    - ls -all ./src/main/resources/static
-    
-BE_Test:
-  extends: .Job_Only
-  image: maven:3.3.9
-  stage: betest
-  script:
-    - mvn test $MAVEN_OPTS
+#FE_Test:
+#  extends: .Job_Only
+#  image: node:10
+#  stage: fetest
+#  before_script:
+#    - npm install
+#  script:
+#    - npm test
+#  coverage: /All files\s*\|\s*([\d\.]+)/
+#
+#FE_Build:
+#  extends: .Job_Only
+#  image: node:10
+#  stage: febuild
+#  before_script:
+#    - npm install
+#  script:
+#    - npm run dist
+#    - ls -all ./src/main/resources/static
+#
+#BE_Test:
+#  extends: .Job_Only
+#  image: maven:3.3.9
+#  stage: betest
+#  script:
+#    - mvn test $MAVEN_OPTS
 
 BE_Build:
   extends: .Job_Only
