@@ -5,7 +5,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>vuejs-springboot-starter</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.3</version>
     <packaging>jar</packaging>
 
     <name>vuejs-springboot-starter</name>
@@ -65,6 +65,32 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- TODO: jacoco + sonarqube 커버리지 및 코드분석 -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.6.0.1398</version>
             </plugin>
         </plugins>
     </build>

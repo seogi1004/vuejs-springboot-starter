@@ -2,7 +2,9 @@
 
 [![pipeline status](https://gitlab.com/alvin.h/vuejs-springboot-starter/badges/develop/pipeline.svg)](https://gitlab.com/alvin.h/vuejs-springboot-starter/commits/develop)
 [![coverage report](https://gitlab.com/alvin.h/vuejs-springboot-starter/badges/develop/coverage.svg)](https://gitlab.com/alvin.h/vuejs-springboot-starter/commits/develop)
-
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=vuejs-springboot-starter&metric=bugs)](https://sonarcloud.io/dashboard?id=vuejs-springboot-starter)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=vuejs-springboot-starter&metric=code_smells)](https://sonarcloud.io/dashboard?id=vuejs-springboot-starter)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=vuejs-springboot-starter&metric=coverage)](https://sonarcloud.io/dashboard?id=vuejs-springboot-starter)
 
 ## Getting started
 
