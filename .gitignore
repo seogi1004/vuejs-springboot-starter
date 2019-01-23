@@ -8,3 +8,6 @@ coverage/
 # Project
 dist/
 target/
+
+# IntelliJ
+*.iml
