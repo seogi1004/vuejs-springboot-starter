@@ -1,0 +1,21 @@
+cache:
+  directories:
+    - "$HOME/.m2/repository/"
+    - "$HOME/src/main/resources/static/"
+    - "$HOME/dist/"
+
+branches:
+  only:
+    - master
+
+stages:
+  - frontend
+
+jobs:
+  include:
+    - stage: frontend
+      language: node_js
+      install: npm install
+      script: npm test
+      after_success: npm run dist
+
