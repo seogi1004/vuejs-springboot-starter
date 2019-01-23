@@ -16,7 +16,7 @@ jobs:
   include:
     - stage: frontend
       language: node_js
-      install: npm install
+      install: npm install -g npm@2
       script: npm test
       after_success: npm run dist
 
