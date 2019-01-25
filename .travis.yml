@@ -12,6 +12,7 @@ stages:
   - frontend
   - backend
   - deploy
+  - patch
 
 jobs:
   include:
@@ -19,28 +20,46 @@ jobs:
       language: node_js
       node_js:
         - "10"
-      install: npm install
-      script: npm test
-      after_success: npm run dist
+      install: 
+        - npm install
+      before_script: 
+        - npm test
+      script: 
+        - npm run dist
       
     - stage: backend
       language: java
       jdk: openjdk8
-      script:
+      before_script:
         - mvn install jacoco:report -Dmaven.repo.local=.m2/repository --batch-mode
-      after_success:
+      script:
         - mvn sonar:sonar -Dsonar.projectKey=seogi1004_vuejs-springboot-starter -Dsonar.organization=seogi1004-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
     - stage: deploy
       language: java
       jdk: openjdk8
-      install:
+      before_install:
         - apt-get update -qq && apt-get install -y -qq sshpass
-      script:
+      before_script:
         - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-      after_success:
+      script:
         - ls -all ./dist
         - sshpass -V
         - export SSHPASS=$SSH_PASSWORD
         # SSH 포트가 22가 아니라면 -P 옵션을 줄것
         - sshpass -e scp -r -oStrictHostKeyChecking=no ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@180.228.199.230:/opt/
+
+    - stage: patch
+      language: java
+      jdk: openjdk8
+      before_script:
+        - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        - echo $POM_VERSION
+        - git config --global user.name "alvin.h"
+        - git config --global user.email "seogi777@gmail.com"
+      script:
+        - git checkout $CI_COMMIT_REF_NAME
+        - git remote remove origin
+        - git remote add origin https://seogi1004:$GIT_TOKEN@gitlab.com/webpack-springboot-starter.git
+        - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
+        - git push origin --tags
