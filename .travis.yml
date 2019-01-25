@@ -34,9 +34,10 @@ jobs:
     - stage: deploy
       language: java
       jdk: openjdk8
+      install:
+        - apt-get update -qq && apt-get install -y -qq sshpass
       script:
         - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-        - apt-get update -qq && apt-get install -y -qq sshpass
       after_success:
         - ls -all ./dist
         - sshpass -V
