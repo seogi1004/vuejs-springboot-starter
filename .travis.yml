@@ -58,7 +58,7 @@ jobs:
         - git config --global user.name "alvin.h"
         - git config --global user.email "seogi777@gmail.com"
       script:
-        - git checkout $CI_COMMIT_REF_NAME
+        - git checkout master
         - git remote remove origin
         - git remote add origin https://seogi1004:$GIT_TOKEN@gitlab.com/webpack-springboot-starter.git
         - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
