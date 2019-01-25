@@ -9,10 +9,6 @@ cache:
     - "$HOME/src/main/resources/static/"
     - "$HOME/dist/"
 
-branches:
-  only:
-    - master
-
 stages:
   - frontend
   - backend
