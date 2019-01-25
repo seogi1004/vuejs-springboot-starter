@@ -11,8 +11,8 @@ branches:
 stages:
   - frontend
   - backend
+  - deploy
 
-# Test
 jobs:
   include:
     - stage: frontend
@@ -22,6 +22,7 @@ jobs:
       install: npm install
       script: npm test
       after_success: npm run dist
+      
     - stage: backend
       language: java
       jdk: openjdk8
@@ -29,3 +30,16 @@ jobs:
         - mvn install jacoco:report -Dmaven.repo.local=.m2/repository --batch-mode
       after_success:
         - mvn sonar:sonar -Dsonar.projectKey=seogi1004_vuejs-springboot-starter -Dsonar.organization=seogi1004-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+
+    - stage: deploy
+      language: java
+      jdk: openjdk8
+      script:
+        - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        - apt-get update -qq && apt-get install -y -qq sshpass
+      after_success:
+        - ls -all ./dist
+        - sshpass -V
+        - export SSHPASS=$SSH_PASSWORD
+        # SSH 포트가 22가 아니라면 -P 옵션을 줄것
+        - sshpass -e scp -r -oStrictHostKeyChecking=no ./dist/vuejs-springboot-starter-$POM_VERSION.jar root@180.228.199.230:/opt/
