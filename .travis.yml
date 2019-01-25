@@ -1,3 +1,8 @@
+addons:
+  apt:
+    packages:
+      - sshpass
+
 cache:
   directories:
     - "$HOME/.m2/repository/"
@@ -22,27 +27,25 @@ jobs:
         - "10"
       install: 
         - npm install
-      before_script: 
-        - npm test
       script: 
+        - npm test
+      after_success: 
         - npm run dist
       
     - stage: backend
       language: java
       jdk: openjdk8
-      before_script:
-        - mvn install jacoco:report -Dmaven.repo.local=.m2/repository --batch-mode
       script:
+        - mvn install jacoco:report -Dmaven.repo.local=.m2/repository --batch-mode
+      after_success:
         - mvn sonar:sonar -Dsonar.projectKey=seogi1004_vuejs-springboot-starter -Dsonar.organization=seogi1004-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
     - stage: deploy
       language: java
       jdk: openjdk8
-      before_install:
-        - apt-get update -qq && apt-get install -y -qq sshpass
-      before_script:
-        - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
       script:
+        - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+      after_success:
         - ls -all ./dist
         - sshpass -V
         - export SSHPASS=$SSH_PASSWORD
@@ -52,12 +55,12 @@ jobs:
     - stage: patch
       language: java
       jdk: openjdk8
-      before_script:
+      script:
         - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
         - echo $POM_VERSION
+      after_success:
         - git config --global user.name "alvin.h"
         - git config --global user.email "seogi777@gmail.com"
-      script:
         - git checkout master
         - git remote remove origin
         - git remote add origin https://seogi1004:$GIT_TOKEN@gitlab.com/webpack-springboot-starter.git
