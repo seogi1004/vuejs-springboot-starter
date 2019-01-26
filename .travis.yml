@@ -59,6 +59,6 @@ jobs:
         - git config --global user.email "seogi777@gmail.com"
         - git checkout master
         - git remote remove origin
-        - git remote add origin https://seogi1004:$GIT_TOKEN@github.com/vuejs-springboot-starter.git
+        - git remote add origin https://seogi1004:$GIT_TOKEN@github.com/seogi1004/vuejs-springboot-starter.git
         - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
         - git push origin --tags
