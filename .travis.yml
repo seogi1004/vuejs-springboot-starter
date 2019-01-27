@@ -10,9 +10,9 @@ cache:
     - "$HOME/dist/"
 
 stages:
-#  - frontend
-#  - backend
-#  - deploy
+  - frontend
+  - backend
+  - deploy
   - patch
 
 jobs:
@@ -52,6 +52,7 @@ jobs:
       language: java
       jdk: openjdk8
       before_script:
+        # pom.xml이 변경되지 않았다면 프로세스를 종료함
         - |
           if ! git diff --name-only $TRAVIS_COMMIT_RANGE | grep 'pom.xml'
           then
