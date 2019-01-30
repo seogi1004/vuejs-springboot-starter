@@ -5,7 +5,7 @@
 # SSH_PASSWORD (deploy)
 
 cache:
-  key: "$CI_BUILD_REF_NAME"
+  key: "$CI_COMMIT_REF_NAME"
   paths:
     - .m2/repository/
     - src/main/resources/static/
