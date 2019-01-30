@@ -1,3 +1,9 @@
+# Environment variables
+#
+# GIT_TOKEN (patch)
+# SONAR_TOKEN (backend)
+# SSH_PASSWORD (deploy)
+
 addons:
   apt:
     packages:
