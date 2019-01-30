@@ -16,16 +16,8 @@ stages:
   - backend
   - deploy
   - patch
-
-.Job_Only:
-  only:
-    changes:
-      - "src/**/*"
-    refs:
-      - merge_requests
    
 Frontend:
-  extends: .Job_Only
   image: node:10
   stage: frontend
   before_script:
@@ -38,7 +30,6 @@ Frontend:
   coverage: /All files\s*\|\s*([\d\.]+)/
 
 Backend:
-  extends: .Job_Only
   image: maven:3.3.9
   stage: backend
   script:
@@ -47,13 +38,13 @@ Backend:
     - mvn sonar:sonar -Dsonar.projectKey=vuejs-springboot-starter -Dsonar.organization=alvin -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
 Deploy:
-  extends: .Job_Only
   image: maven:3.3.9
   stage: deploy
   before_script:
-    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
     - apt-get update -qq && apt-get install -y -qq sshpass
   script:
+    - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+  after_script:
     - ls -all ./dist
     - sshpass -V
     - export SSHPASS=$SSH_PASSWORD
@@ -65,20 +56,15 @@ Patch:
   only:
     changes:
       - "pom.xml"
-    refs:
-      - merge_requests
   stage: patch
-  variables:
-    # 사용자 프로파일 설정에서 PERSONAL_ACCESS_TOKEN을 발급해야함
-    CI_REPOSITORY_URL: https://alvin.h:$GIT_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
   before_script:
     - POM_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
     - echo $POM_VERSION
+  script:
     - git config --global user.name "alvin.h"
     - git config --global user.email "seogi777@gmail.com"
-  script:
     - git checkout $CI_COMMIT_REF_NAME
     - git remote remove origin
-    - git remote add origin $CI_REPOSITORY_URL
+    - git remote add origin https://alvin.h:$GIT_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
     - git tag -a $POM_VERSION -m "Version created by gitlab-ci Build"
     - git push origin --tags
